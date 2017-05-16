@@ -5,9 +5,8 @@
  */
 package projet_bdd_java_app.DTO;
 
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -19,48 +18,58 @@ import javax.swing.JPanel;
  * @author Quentin
  */
 public class ConnexionWindow extends javax.swing.JFrame {
-    private JButton inscriptionBtn = null;
-    private JButton loginBtn = null;
-    private JPanel connectionPanel = new JPanel();
-    private JPanel loginFormPanel = new JPanel();
-    private JPanel inscriptionFormPanel = new JPanel();
-    private GridBagConstraints gbc = new GridBagConstraints();
     private final String inscription_btn_label = "M'inscrire";
     private final String login_btn_label = "Me connecter";
     private final String windowTitle = "Connexion / Inscription";
+    private final String[] panelList = {"connectionPanel", "inscriptionPanel"};
+    
+    private CardLayout cardLayout = new CardLayout();
+    private JPanel content = new JPanel();
+    private ConnectionPanel connectionPanel = new ConnectionPanel();
+    private InscriptionPanel inscriptionPanel = new InscriptionPanel();
+    
+    private JButton inscriptionBtn = new JButton(inscription_btn_label);
+    private JButton loginBtn = new JButton(login_btn_label);
 
     /**
      * Creates new form ConnexionWindow
      */
     public ConnexionWindow() {
-        initComponents();
         this.setTitle(windowTitle);
         this.setSize(500, 350);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         
-        connectionPanel.setLayout(new GridBagLayout());
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-
-        loginBtn = new JButton(inscription_btn_label);
-        inscriptionBtn = new JButton(login_btn_label);
+        JPanel panel = new JPanel();
         
         loginBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                connectionPanel.setVisible(false);
+                cardLayout.show(content, panelList[0]);
+                panel.setVisible(false);
+                content.setVisible(true);
             }
         });
         
         inscriptionBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                connectionPanel.setVisible(false);
+                cardLayout.show(content, panelList[1]);
+                panel.setVisible(false);
+                content.setVisible(true);
             }
         });
         
-        connectionPanel.add(loginBtn);
-        connectionPanel.add(inscriptionBtn);
-        this.setContentPane(connectionPanel);
+        panel.add(loginBtn, BorderLayout.LINE_START);
+        panel.add(inscriptionBtn, BorderLayout.AFTER_LINE_ENDS);
+        
+        content.setLayout(cardLayout);
+        
+        content.add(connectionPanel, panelList[0]);
+        content.add(inscriptionPanel, panelList[1]);
+        
+        content.setVisible(false);
+        
+        this.getContentPane().add(panel, BorderLayout.NORTH);
+        this.getContentPane().add(content, BorderLayout.CENTER);
         this.setVisible(true);
     }
 
