@@ -5,6 +5,11 @@
  */
 package projet_bdd_java_app.DTO;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 /**
@@ -12,17 +17,45 @@ import javax.swing.JFrame;
  * @author Quentin
  */
 public class ConnexionWindow extends javax.swing.JFrame {
-    private final String WINDOWTITLE = "Connexion / Inscription";
+    private JButton inscriptionBtn = null;
+    private JButton loginBtn = null;
+    private final String inscription_btn_label = "M'inscrire";
+    private final String login_btn_label = "Me connecter";
+    private final String windowTitle = "Connexion / Inscription";
 
     /**
      * Creates new form ConnexionWindow
      */
     public ConnexionWindow() {
         initComponents();
-        this.setTitle(WINDOWTITLE);
-        this.setSize(750, 500);
+        this.setTitle(windowTitle);
+        this.setSize(500, 350);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
+        
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        loginBtn = new JButton(inscription_btn_label);
+        inscriptionBtn = new JButton(login_btn_label);
+        
+        loginBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                // action to perform
+            }
+        });
+        
+        inscriptionBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                // action to perform
+            }
+        });
+        
+        add(loginBtn, gbc);
+        add(inscriptionBtn, gbc);
+        
         this.setVisible(true);
     }
 
