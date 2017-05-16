@@ -5,12 +5,14 @@
  */
 package projet_bdd_java_app.DTO;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,6 +21,10 @@ import javax.swing.JFrame;
 public class ConnexionWindow extends javax.swing.JFrame {
     private JButton inscriptionBtn = null;
     private JButton loginBtn = null;
+    private JPanel connectionPanel = new JPanel();
+    private JPanel loginFormPanel = new JPanel();
+    private JPanel inscriptionFormPanel = new JPanel();
+    private GridBagConstraints gbc = new GridBagConstraints();
     private final String inscription_btn_label = "M'inscrire";
     private final String login_btn_label = "Me connecter";
     private final String windowTitle = "Connexion / Inscription";
@@ -33,8 +39,7 @@ public class ConnexionWindow extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         
-        setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
+        connectionPanel.setLayout(new GridBagLayout());
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
@@ -43,19 +48,19 @@ public class ConnexionWindow extends javax.swing.JFrame {
         
         loginBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                // action to perform
+                connectionPanel.setVisible(false);
             }
         });
         
         inscriptionBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                // action to perform
+                connectionPanel.setVisible(false);
             }
         });
         
-        add(loginBtn, gbc);
-        add(inscriptionBtn, gbc);
-        
+        connectionPanel.add(loginBtn);
+        connectionPanel.add(inscriptionBtn);
+        this.setContentPane(connectionPanel);
         this.setVisible(true);
     }
 
