@@ -5,6 +5,9 @@
  */
 package projet_bdd_java_app;
 
+import javax.swing.JFrame;
+import projet_bdd_java_app.DTO.ConnexionWindow;
+
 /**
  *
  * @author Quentin
@@ -15,7 +18,8 @@ public class Projet_BDD_Java_App {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        // ouverture de la fenêtre de connexion
+        JFrame connexionWindow = new ConnexionWindow();
     }
     
 }
